@@ -150,6 +150,13 @@ export function runTutorial({ THREE, scene, camera, renderer, groundHeight, stat
     }
   }
   $("shift-lock").onclick = e => toggleLock(e.pointerType === "mouse");
+  // Shift frees the mouse while it steers the view, and captures it again when it is free.
+  function toggleMouse() {
+    if (phase !== "walk") return;
+    if (document.pointerLockElement === canvas) { document.exitPointerLock(); return; }
+    if (third) setShiftLock(true);
+    canvas.requestPointerLock?.()?.catch?.(() => {});
+  }
   document.addEventListener("pointerlockchange", () => {
     if (!document.pointerLockElement && phase === "walk") setShiftLock(false);
   });
@@ -232,10 +239,6 @@ export function runTutorial({ THREE, scene, camera, renderer, groundHeight, stat
     ExpeditionUI.run.checkpoint({ x: suit.position.x, z: suit.position.z, yaw, pitch, third, shiftLocked });
     requestFrame();
   };
-  $("toggle-pad").onclick = () => {
-    const visible = document.body.classList.toggle("show-movement-pad");
-    $("toggle-pad").setAttribute("aria-pressed", String(visible));
-  };
 
   addEventListener("keydown", e => {
     if (phase !== "walk" || e.target.closest("input, textarea, select") || e.ctrlKey || e.metaKey || e.altKey) return;
@@ -245,7 +248,7 @@ export function runTutorial({ THREE, scene, camera, renderer, groundHeight, stat
       look(e.code === "ArrowLeft" ? -35 : e.code === "ArrowRight" ? 35 : 0, e.code === "ArrowUp" ? -25 : e.code === "ArrowDown" ? 25 : 0);
     }
     if (!e.repeat && e.code === "KeyV") changeView();
-    if (!e.repeat && (e.code === "ShiftLeft" || e.code === "ShiftRight")) toggleLock(true);
+    if (!e.repeat && (e.code === "ShiftLeft" || e.code === "ShiftRight")) toggleMouse();
     if (!e.repeat && e.code === "KeyE") use();
   });
   addEventListener("keyup", e => keys.delete(e.code));
