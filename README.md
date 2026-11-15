@@ -38,7 +38,7 @@ and Earth acknowledges your finding. Dialogue reveals gradually and includes
 resource cost, or failure state. **Return to Pip** brings you back without losing
 your findings; **Ask Pip** points toward the next task.
 On touchscreens, the movement pad supports taps and held arrows. In 3D, **Shift**
-frees the mouse from steering the view and captures it again.
+locks the mouse to steer the view, and frees it again for clicking.
 
 After the transmission, **View discovery journal** returns to selection with the journal expanded. Active
 progress lasts in the current browser tab. The latest completed journal stays in
