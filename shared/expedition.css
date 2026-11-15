@@ -94,3 +94,5 @@ body[data-expedition="3d"] .pip-dialog.is-scanning #scan-preview { height:100px;
 .command-preview p{margin:0;font-size:13px}.command-preview p+p{margin-top:6px}
 .command-preview.risk{border-color:#da846f;border-left-color:#da846f;background:#3a2a2e}
 @media(max-width:720px){.map-habitat{left:66%;top:56%}}
+/* Keep Pip's close button a square box centered on the × in every view. */
+#pip-radio .pip-x{display:grid;place-items:center;justify-content:center;align-content:center;width:34px;height:34px;padding:0;margin:0 0 auto auto;font-size:22px;line-height:1;border-radius:6px}
